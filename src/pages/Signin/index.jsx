@@ -16,17 +16,28 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import GoogleIcon from "@mui/icons-material/Google";
+import logo from "../../assets/images/semply-logo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { getPass } from "../../store/features/dbData/EmailsSlice";
+import { getId, getData } from "../../store/features/dbData/dbSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Signin() {
-  const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const dbData = useSelector((state) => state.dbData.value);
+  const emails = useSelector((state) => state.emails.value);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [Email, setEmail] = useState("");
 
   return (
     <div>
+      <Box sx={{ mt: 3, ml: 3 }}>
+        <img width={120} src={logo} />
+      </Box>
       <Box
         maxWidth="sm"
         sx={{
-          height: "600px",
+          height: "550px",
           //   boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
           position: "absolute",
           top: 0,
@@ -43,70 +54,61 @@ export default function Signin() {
           border: "1px solid #ded7d9",
         }}
       >
-        <Typography
-          sx={{ textAlign: "center", fontSize: 30, fontWeight: 500, mt: 7 }}
-        >
-          Log In to Semply
-        </Typography>
+        <Box sx={{ width: "350px", margin: "auto" }}>
+          <Typography
+            sx={{ textAlign: "center", fontSize: 30, fontWeight: 500, mt: 7 }}
+          >
+            Log In to Semply
+          </Typography>
 
-        <FormControl variant="outlined" sx={{ width: "100%", mt: 5 }}>
-          <OutlinedInput
-            required
-            sx={{
-              height: "40px",
-              width: "350px",
-              borderRadius: "10px",
-              fontSize: 12,
-              marginX: "auto",
-            }}
-            placeholder="Email or Username"
-            id="emailOrusername"
-            startAdornment={
-              <InputAdornment position="start">
-                <AccountCircle />
-              </InputAdornment>
-            }
-          />
-          <OutlinedInput
-            required
-            sx={{
-              height: "40px",
-              width: "350px",
-              borderRadius: "10px",
-              fontSize: 12,
-              marginX: "auto",
-              mt: 3,
-            }}
-            id="password"
-            type={showPassword ? "text" : "password"}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            placeholder="Password"
-          />
+          <FormControl variant="outlined" sx={{ width: "100%", mt: 5 }}>
+            <OutlinedInput
+              onChange={(event) => setEmail(event.target.value)}
+              required
+              sx={{
+                height: "40px",
+                width: "350px",
+                borderRadius: "10px",
+                fontSize: 12,
+                marginX: "auto",
+              }}
+              placeholder="Email"
+              id="emailOrusername"
+              startAdornment={
+                <InputAdornment position="start">
+                  <AccountCircle />
+                </InputAdornment>
+              }
+            />
+          </FormControl>
           <Button
+            onClick={() => {
+              emails.forEach((element) => {
+                if (element == Email) {
+                  dispatch(getPass(element));
+                  dispatch(getId(element));
+                  setTimeout(() => {
+                    navigate("/signup");
+                  }, 1500);
+                } else {
+                  return "";
+                }
+              });
+            }}
             variant="contained"
             sx={[
               {
                 mt: 3,
-                marginX: "auto",
                 borderRadius: "100px",
-                width: "350px",
+                width: "100%",
                 bgcolor: "#E7457A",
                 mb: 3,
+                marginX: "auto",
               },
               { ":hover": { bgcolor: "#06005C" } },
             ]}
           >
-            Login with email
+            Continue with Email
           </Button>
           <Divider sx={{ width: "350px", marginX: "auto" }}>
             <Typography>or</Typography>
@@ -154,7 +156,7 @@ export default function Signin() {
           >
             Sign Up
           </Button>
-        </FormControl>
+        </Box>
       </Box>
     </div>
   );
