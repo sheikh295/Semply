@@ -76,7 +76,11 @@ export default function Signin() {
   return (
     <div>
       <BootstrapDialog
-        sx={{ width: "500px", mx: "auto", mt: -30 }}
+        sx={{
+          width: "500px",
+          mx: "auto",
+          mt: -30,
+        }}
         onClose={() => {
           setDisclaimer(false);
         }}

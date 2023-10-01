@@ -19,6 +19,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import logo from "../../assets/images/semply-logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../store/features/dbData/dbSlice";
+import { LoadingButton } from "@mui/lab";
 
 export default function SigninPass() {
   const emails = useSelector((state) => state.emails.value);
@@ -27,6 +28,27 @@ export default function SigninPass() {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const [Pass, setPass] = useState("");
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const loginSubmitHandler = (event) => {
+    event.preventDefault();
+    if (emails == Pass) {
+      dispatch(getData());
+      setLoading(true);
+      setError(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+    } else {
+      setLoading(true);
+      setTimeout(() => {
+        setError(true);
+        setLoading(false);
+      }, 1500);
+    }
+  };
+
   return (
     <div>
       <Box sx={{ mt: 3, ml: 3 }}>
@@ -36,7 +58,7 @@ export default function SigninPass() {
         maxWidth="sm"
         sx={{
           height: "550px",
-          //   boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
           position: "absolute",
           top: 0,
           bottom: 0,
@@ -58,55 +80,66 @@ export default function SigninPass() {
           >
             Welcome, Please Enter Your Password
           </Typography>
-          <FormControl variant="outlined" sx={{ width: "100%" }}>
-            <OutlinedInput
-              onChange={(event) => setPass(event.target.value)}
-              required
-              sx={{
-                height: "40px",
-                width: "350px",
-                borderRadius: "10px",
-                fontSize: 12,
-                marginX: "auto",
-                mt: 3,
-              }}
-              id="password"
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              placeholder="Password"
-            />
-          </FormControl>
-          <Button
-            onClick={() => {
-              if (emails == Pass) {
-                dispatch(getData());
-              }
+          <Box
+            component="form"
+            onSubmit={(event) => {
+              loginSubmitHandler(event);
             }}
-            variant="contained"
-            sx={[
-              {
-                mt: 3,
-                borderRadius: "100px",
-                width: "100%",
-                bgcolor: "#E7457A",
-                mb: 3,
-                marginX: "auto",
-              },
-              { ":hover": { bgcolor: "#06005C" } },
-            ]}
           >
-            Login
-          </Button>
+            <FormControl variant="outlined" sx={{ width: "100%" }}>
+              <InputLabel
+                sx={error ? { color: "red", mt: 1.5 } : { display: "none" }}
+              >
+                Incorrect Password
+              </InputLabel>
+              <OutlinedInput
+                autoFocus
+                error={error ? true : false}
+                onChange={(event) => setPass(event.target.value)}
+                required
+                sx={{
+                  height: "40px",
+                  width: "350px",
+                  borderRadius: "10px",
+                  fontSize: 12,
+                  marginX: "auto",
+                  mt: 3,
+                }}
+                placeholder="Password"
+                id="password"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+            <LoadingButton
+              loading={loading ? true : false}
+              type="submit"
+              variant="contained"
+              sx={[
+                {
+                  mt: 3,
+                  borderRadius: "100px",
+                  width: "100%",
+                  bgcolor: "#E7457A",
+                  mb: 3,
+                  marginX: "auto",
+                },
+                { ":hover": { bgcolor: "#06005C" } },
+              ]}
+            >
+              Login
+            </LoadingButton>
+          </Box>
           <Divider sx={{ width: "350px", marginX: "auto" }}>
             <Typography>or</Typography>
           </Divider>
