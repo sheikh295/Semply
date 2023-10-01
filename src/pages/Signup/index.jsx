@@ -5,6 +5,7 @@ import {
   Button,
   Container,
   Divider,
+  Fade,
   FormControl,
   IconButton,
   Input,
@@ -32,6 +33,7 @@ export default function Signup() {
   const [Pass, setPass] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   return (
     <div>
       <Box sx={{ mt: 3, ml: 3 }}>
@@ -41,7 +43,7 @@ export default function Signup() {
         maxWidth="sm"
         sx={{
           height: "600px",
-          //   boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
           position: "absolute",
           top: 0,
           bottom: 0,
@@ -61,7 +63,7 @@ export default function Signup() {
           <Typography
             sx={{ textAlign: "center", fontSize: 20, fontWeight: 500, mt: 4 }}
           >
-            Welcome, Enter following details to create your account
+            Enter following details to create your account
           </Typography>
           <Box component="form">
             <Box
