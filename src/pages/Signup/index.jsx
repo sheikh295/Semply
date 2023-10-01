@@ -21,6 +21,7 @@ import logo from "../../assets/images/semply-logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getData, createUser } from "../../store/features/dbData/dbSlice";
 import { useNavigate } from "react-router-dom";
+import { LoadingButton } from "@mui/lab";
 
 export default function Signup() {
   const emails = useSelector((state) => state.emails.value);
@@ -33,6 +34,12 @@ export default function Signup() {
   const [Pass, setPass] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const matchEmail = (email) => {
+    return email == Email;
+  };
 
   return (
     <div>
@@ -65,7 +72,43 @@ export default function Signup() {
           >
             Enter following details to create your account
           </Typography>
-          <Box component="form">
+          {error ? (
+            <Typography
+              sx={{
+                textAlign: "center",
+                fontSize: 12,
+                mt: 0,
+                mb: 0,
+                color: "red",
+              }}
+            >
+              Already Registered Email
+            </Typography>
+          ) : (
+            ""
+          )}
+          <Box
+            component="form"
+            onSubmit={(event) => {
+              event.preventDefault();
+              setLoading(true);
+              const alreadyRegistered = emails.find(matchEmail);
+              if (alreadyRegistered == undefined) {
+                const encodedPass = btoa(Pass);
+                dispatch(createUser([fName, lName, Email, encodedPass]));
+                setError(false);
+                setTimeout(() => {
+                  navigate("/");
+                  location.reload();
+                }, 1500);
+              } else {
+                setTimeout(() => {
+                  setError(true);
+                  setLoading(false);
+                }, 1500);
+              }
+            }}
+          >
             <Box
               sx={{
                 display: "flex",
@@ -130,7 +173,9 @@ export default function Signup() {
             </FormControl>
             <FormControl variant="outlined" sx={{ width: "100%" }}>
               <OutlinedInput
-                onChange={(event) => setPass(event.target.value)}
+                onChange={(event) => {
+                  setPass(event.target.value);
+                }}
                 required
                 sx={{
                   height: "40px",
@@ -156,12 +201,9 @@ export default function Signup() {
                 placeholder="Password"
               />
             </FormControl>
-            <Button
+            <LoadingButton
+              loading={loading ? true : false}
               type="submit"
-              onSubmit={() => {
-                dispatch(createUser([fName, lName, Email, Pass]));
-                navigate("/");
-              }}
               variant="contained"
               sx={[
                 {
@@ -176,7 +218,7 @@ export default function Signup() {
               ]}
             >
               Sign Up
-            </Button>
+            </LoadingButton>
           </Box>
           <Divider sx={{ width: "350px", marginX: "auto" }}>
             <Typography>or</Typography>

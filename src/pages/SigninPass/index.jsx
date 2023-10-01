@@ -33,7 +33,8 @@ export default function SigninPass() {
 
   const loginSubmitHandler = (event) => {
     event.preventDefault();
-    if (emails == Pass) {
+    const pass = atob(emails);
+    if (pass == Pass) {
       dispatch(getData());
       setLoading(true);
       setError(false);
