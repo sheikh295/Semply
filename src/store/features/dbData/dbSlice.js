@@ -7,6 +7,8 @@ import {
   query,
   where,
   onSnapshot,
+  setDoc,
+  addDoc,
 } from "firebase/firestore";
 import { FBDataBase } from "../../../shared/Firebase";
 
@@ -41,9 +43,17 @@ export const dbSlice = createSlice({
         }
       });
     },
+    createUser: (state, action) => {
+      addDoc(collection(FBDataBase, "users"), {
+        fName: action.payload[0],
+        lName: action.payload[1],
+        email: action.payload[2],
+        password: action.payload[3],
+      });
+    },
   },
 });
 
-export const { getData, getId } = dbSlice.actions;
+export const { getData, getId, createUser } = dbSlice.actions;
 
 export default dbSlice.reducer;

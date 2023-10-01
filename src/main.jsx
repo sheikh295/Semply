@@ -7,11 +7,16 @@ import Signin from "./pages/Signin";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Signup from "./pages/Signup";
+import SigninPass from "./pages/SigninPass";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Signin />,
+  },
+  {
+    path: "/signin",
+    element: <SigninPass />,
   },
   {
     path: "/signup",

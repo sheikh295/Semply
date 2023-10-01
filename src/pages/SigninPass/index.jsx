@@ -18,17 +18,15 @@ import React, { useState } from "react";
 import GoogleIcon from "@mui/icons-material/Google";
 import logo from "../../assets/images/semply-logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getPass } from "../../store/features/dbData/EmailsSlice";
-import { getId, getData } from "../../store/features/dbData/dbSlice";
-import { useNavigate } from "react-router-dom";
+import { getData } from "../../store/features/dbData/dbSlice";
 
-export default function Signin() {
-  const dbData = useSelector((state) => state.dbData.value);
+export default function SigninPass() {
   const emails = useSelector((state) => state.emails.value);
+  const dbData = useSelector((state) => state.dbData.value);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [Pass, setPass] = useState("");
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [Email, setEmail] = useState("");
-
   return (
     <div>
       <Box sx={{ mt: 3, ml: 3 }}>
@@ -56,14 +54,13 @@ export default function Signin() {
       >
         <Box sx={{ width: "350px", margin: "auto" }}>
           <Typography
-            sx={{ textAlign: "center", fontSize: 30, fontWeight: 500, mt: 7 }}
+            sx={{ textAlign: "center", fontSize: 20, fontWeight: 500, mt: 7 }}
           >
-            Log In to Semply
+            Welcome, Please Enter Your Password
           </Typography>
-
-          <FormControl variant="outlined" sx={{ width: "100%", mt: 5 }}>
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
             <OutlinedInput
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(event) => setPass(event.target.value)}
               required
               sx={{
                 height: "40px",
@@ -71,29 +68,29 @@ export default function Signin() {
                 borderRadius: "10px",
                 fontSize: 12,
                 marginX: "auto",
+                mt: 3,
               }}
-              placeholder="Email"
-              id="emailOrusername"
-              startAdornment={
-                <InputAdornment position="start">
-                  <AccountCircle />
+              id="password"
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
                 </InputAdornment>
               }
+              placeholder="Password"
             />
           </FormControl>
           <Button
             onClick={() => {
-              emails.forEach((element) => {
-                if (element == Email) {
-                  dispatch(getPass(element));
-                  dispatch(getId(element));
-                  setTimeout(() => {
-                    navigate("/signin");
-                  }, 1500);
-                } else {
-                  return "";
-                }
-              });
+              if (emails == Pass) {
+                dispatch(getData());
+              }
             }}
             variant="contained"
             sx={[
@@ -108,7 +105,7 @@ export default function Signin() {
               { ":hover": { bgcolor: "#06005C" } },
             ]}
           >
-            Continue with Email
+            Login
           </Button>
           <Divider sx={{ width: "350px", marginX: "auto" }}>
             <Typography>or</Typography>
@@ -133,12 +130,9 @@ export default function Signin() {
             <Typography />
           </Button>
           <Divider sx={{ width: "350px", marginX: "auto", mt: 5 }}>
-            <Typography>Don't have a Semply Account</Typography>
+            <Typography>Forgot Your Password</Typography>
           </Divider>
           <Button
-            onClick={() => {
-              navigate("/signup");
-            }}
             variant="outlined"
             sx={[
               {
@@ -157,7 +151,7 @@ export default function Signin() {
               },
             ]}
           >
-            Sign Up
+            Froget Password
           </Button>
         </Box>
       </Box>

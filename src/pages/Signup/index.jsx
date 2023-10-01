@@ -18,14 +18,20 @@ import React, { useState } from "react";
 import GoogleIcon from "@mui/icons-material/Google";
 import logo from "../../assets/images/semply-logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getData } from "../../store/features/dbData/dbSlice";
+import { getData, createUser } from "../../store/features/dbData/dbSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const emails = useSelector((state) => state.emails.value);
   const dbData = useSelector((state) => state.dbData.value);
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [fName, setfName] = useState("");
+  const [lName, setlName] = useState("");
+  const [Email, setEmail] = useState("");
   const [Pass, setPass] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div>
       <Box sx={{ mt: 3, ml: 3 }}>
@@ -34,7 +40,7 @@ export default function Signup() {
       <Box
         maxWidth="sm"
         sx={{
-          height: "550px",
+          height: "600px",
           //   boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
           position: "absolute",
           top: 0,
@@ -53,59 +59,123 @@ export default function Signup() {
       >
         <Box sx={{ width: "350px", margin: "auto" }}>
           <Typography
-            sx={{ textAlign: "center", fontSize: 20, fontWeight: 500, mt: 7 }}
+            sx={{ textAlign: "center", fontSize: 20, fontWeight: 500, mt: 4 }}
           >
-            Welcome, Please Enter Your Password
+            Welcome, Enter following details to create your account
           </Typography>
-          <FormControl variant="outlined" sx={{ width: "100%" }}>
-            <OutlinedInput
-              onChange={(event) => setPass(event.target.value)}
-              required
+          <Box component="form">
+            <Box
               sx={{
-                height: "40px",
-                width: "350px",
-                borderRadius: "10px",
-                fontSize: 12,
-                marginX: "auto",
-                mt: 3,
-              }}
-              id="password"
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              placeholder="Password"
-            />
-          </FormControl>
-          <Button
-            onClick={() => {
-              if (emails == Pass) {
-                dispatch(getData());
-              }
-            }}
-            variant="contained"
-            sx={[
-              {
-                mt: 3,
-                borderRadius: "100px",
+                display: "flex",
+                justifyContent: "space-between",
                 width: "100%",
-                bgcolor: "#E7457A",
-                mb: 3,
-                marginX: "auto",
-              },
-              { ":hover": { bgcolor: "#06005C" } },
-            ]}
-          >
-            Login
-          </Button>
+              }}
+            >
+              <FormControl variant="outlined">
+                <OutlinedInput
+                  onChange={(event) => setfName(event.target.value)}
+                  required
+                  sx={{
+                    height: "40px",
+                    width: "150px",
+                    borderRadius: "10px",
+                    fontSize: 12,
+                    marginX: "auto",
+                    mt: 3,
+                  }}
+                  id="fName"
+                  type="text"
+                  placeholder="First Name"
+                />
+              </FormControl>
+              <FormControl variant="outlined">
+                <OutlinedInput
+                  onChange={(event) => setlName(event.target.value)}
+                  required
+                  sx={{
+                    height: "40px",
+                    width: "150px",
+                    borderRadius: "10px",
+                    fontSize: 12,
+                    marginX: "auto",
+                    mt: 3,
+                  }}
+                  id="lName"
+                  type="text"
+                  placeholder="Last Name"
+                />
+              </FormControl>
+            </Box>
+            <FormControl variant="outlined" sx={{ width: "100%", mt: 2 }}>
+              <OutlinedInput
+                onChange={(event) => setEmail(event.target.value)}
+                required
+                sx={{
+                  height: "40px",
+                  width: "350px",
+                  borderRadius: "10px",
+                  fontSize: 12,
+                  marginX: "auto",
+                }}
+                placeholder="Email"
+                id="emailOrusername"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <AccountCircle />
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+            <FormControl variant="outlined" sx={{ width: "100%" }}>
+              <OutlinedInput
+                onChange={(event) => setPass(event.target.value)}
+                required
+                sx={{
+                  height: "40px",
+                  width: "350px",
+                  borderRadius: "10px",
+                  fontSize: 12,
+                  marginX: "auto",
+                  mt: 2,
+                }}
+                id="password"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                placeholder="Password"
+              />
+            </FormControl>
+            <Button
+              type="submit"
+              onSubmit={() => {
+                dispatch(createUser([fName, lName, Email, Pass]));
+                navigate("/");
+              }}
+              variant="contained"
+              sx={[
+                {
+                  mt: 3,
+                  borderRadius: "100px",
+                  width: "100%",
+                  bgcolor: "#E7457A",
+                  mb: 3,
+                  marginX: "auto",
+                },
+                { ":hover": { bgcolor: "#06005C" } },
+              ]}
+            >
+              Sign Up
+            </Button>
+          </Box>
           <Divider sx={{ width: "350px", marginX: "auto" }}>
             <Typography>or</Typography>
           </Divider>
@@ -129,9 +199,12 @@ export default function Signup() {
             <Typography />
           </Button>
           <Divider sx={{ width: "350px", marginX: "auto", mt: 5 }}>
-            <Typography>Forgot Your Password</Typography>
+            <Typography>Already Have an account</Typography>
           </Divider>
           <Button
+            onClick={() => {
+              navigate("/");
+            }}
             variant="outlined"
             sx={[
               {
@@ -150,7 +223,7 @@ export default function Signup() {
               },
             ]}
           >
-            Froget Password
+            Log in
           </Button>
         </Box>
       </Box>
