@@ -1,13 +1,8 @@
-import { useState } from 'react'
-import './index.css'
+import { useState } from "react";
+import "./index.css";
 
 function Root() {
-
-  return (
-    <>
-      
-    </>
-  )
+  return <></>;
 }
 
-export default Root
+export default Root;
