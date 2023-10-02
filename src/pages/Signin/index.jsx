@@ -98,7 +98,7 @@ function Signin() {
         sx={{
           width: "500px",
           mx: "auto",
-          mt: -30,
+          mt: -10,
         }}
         onClose={() => {
           dispatch(setDisclaimerfalse());
@@ -123,10 +123,19 @@ function Signin() {
           <CloseIcon />
         </IconButton>
         <DialogContent dividers>
-          <Typography sx={{ ml: 2 }} gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
+          <Typography sx={{ ml: 2, mr: 2 }} gutterBottom>
+            Some of this Application's workflow is inspired by upwork, and is
+            developed to test my skills. <br /> <br /> Any advice for
+            improvements are welcomed, you can email at
+            mamoordev@sheikhstudio.tech. <br /> <br /> This Application is being
+            hosted on Hostinger wich is not the best place to host such
+            applications. As React along with react router is used to build this
+            spa, so if you are at some page and reload, the hostinger will look
+            for html file with the name given in url, but as react router is
+            used to route and navigate and no html file with such name will be
+            present so hostinger will throw a 404 error and you'll have to start
+            from the root page. So make sure you don't reload. However you can
+            go forward or backward
           </Typography>
         </DialogContent>
       </BootstrapDialog>
