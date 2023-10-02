@@ -123,13 +123,13 @@ function SigninPass() {
                   }}
                 >
                   <FormControl variant="outlined" sx={{ width: "100%" }}>
-                    <InputLabel
-                      sx={
-                        error ? { color: "red", mt: 1.5 } : { display: "none" }
-                      }
-                    >
-                      Incorrect Password
-                    </InputLabel>
+                    {error ? (
+                      <InputLabel sx={{ color: "red", mt: 1.5 }}>
+                        Incorrect Password
+                      </InputLabel>
+                    ) : (
+                      ""
+                    )}
                     <OutlinedInput
                       autoFocus
                       error={error ? true : false}

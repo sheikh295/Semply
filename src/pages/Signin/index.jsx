@@ -123,7 +123,7 @@ function Signin() {
           <CloseIcon />
         </IconButton>
         <DialogContent dividers>
-          <Typography sx={{ ml: 2, mr: 2 }} gutterBottom>
+          <Typography sx={{ ml: 2, mr: 2, mt: 1, mb: 1 }} gutterBottom>
             Some of this Application's workflow is inspired by upwork, and is
             developed to test my skills. <br /> <br /> Any advice for
             improvements are welcomed, you can email at
@@ -134,8 +134,8 @@ function Signin() {
             for html file with the name given in url, but as react router is
             used to route and navigate and no html file with such name will be
             present so hostinger will throw a 404 error and you'll have to start
-            from the root page. So make sure you don't reload. However you can
-            go forward or backward
+            from the root page. So make sure you don't reload while testing the
+            App. However you can go forward or backward
           </Typography>
         </DialogContent>
       </BootstrapDialog>
