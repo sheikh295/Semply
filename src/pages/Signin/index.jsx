@@ -125,8 +125,8 @@ function Signin() {
         <DialogContent dividers>
           <Typography sx={{ ml: 2, mr: 2, mt: 1, mb: 1 }} gutterBottom>
             Some of this Application's workflow is inspired by upwork, and is
-            developed to test my skills. <br /> <br /> Any advice for
-            improvements are welcomed, you can email at
+            developed to test and showcase my skills. <br /> <br /> Any advice
+            for improvements are welcomed, you can email at
             mamoordev@sheikhstudio.tech. <br /> <br /> This Application is being
             hosted on Hostinger wich is not the best place to host such
             applications. As React along with react router is used to build this
