@@ -53,19 +53,7 @@ function Onboarding() {
     { label: "30" },
     { label: "31" },
   ];
-  const month = [
-    "Jan",
-    "Feb",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "Aug",
-    "Sept",
-    "Nov",
-    "Dec",
-  ];
+  const month = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
   const year = [
     "1970",
     "1971",
@@ -231,7 +219,7 @@ function Onboarding() {
                   <Autocomplete
                     sx={{
                       height: "40px",
-                      width: "70px",
+                      width: "55px",
                       fontSize: 8,
                       mt: 3,
                     }}
@@ -245,7 +233,7 @@ function Onboarding() {
                   <Autocomplete
                     sx={{
                       height: "40px",
-                      width: "70px",
+                      width: "55px",
                       fontSize: 8,
                       mt: 3,
                     }}
@@ -259,7 +247,7 @@ function Onboarding() {
                   <Autocomplete
                     sx={{
                       height: "40px",
-                      width: "70px",
+                      width: "100px",
                       fontSize: 8,
                       mt: 3,
                     }}

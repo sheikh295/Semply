@@ -1,5 +1,5 @@
 body::-webkit-scrollbar {
-  width: 15px;
+  width: 12px;
 }
 
 body::-webkit-scrollbar-track {
@@ -14,4 +14,26 @@ body::-webkit-scrollbar-thumb {
 
 button.MuiAutocomplete-clearIndicator {
   display: none;
+}
+.css-6wgmat-MuiAutocomplete-root {
+  min-width: 40px;
+}
+.MuiAutocomplete-inputRoot {
+  min-width: 40px;
+}
+.MuiAutocomplete-hasPopupIcon.css-6wgmat-MuiAutocomplete-root
+  .MuiAutocomplete-inputRoot,
+.MuiAutocomplete-hasClearIcon.css-6wgmat-MuiAutocomplete-root
+  .MuiAutocomplete-inputRoot {
+  padding-right: 20px;
+}
+.css-6wgmat-MuiAutocomplete-root
+  .MuiAutocomplete-inputRoot
+  .MuiAutocomplete-input {
+  width: 0;
+  min-width: 40px;
+}
+div.MuiAutocomplete-popper {
+  margin-left: 0px;
+  padding-left: 0px;
 }
