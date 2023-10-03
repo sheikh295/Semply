@@ -12,13 +12,7 @@ dist
 dist-ssr
 *.local
 
-shared
-
-shared/*
-
-shared
-*.shared
-.shared/*
+../src/shared/
 
 # Editor directories and files
 .vscode/*
