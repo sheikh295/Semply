@@ -15,6 +15,16 @@ body::-webkit-scrollbar-thumb {
 button.MuiAutocomplete-clearIndicator {
   display: none;
 }
+div.css-l4u8b9-MuiInputBase-root-MuiInput-root:after {
+  border-bottom: 2px solid #e7457a;
+}
+div.css-v4u5dn-MuiInputBase-root-MuiInput-root:after {
+  border-bottom: 2px solid #e7457a;
+}
+label.css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  color: #e7457a;
+}
+
 .css-6wgmat-MuiAutocomplete-root {
   min-width: 40px;
 }
