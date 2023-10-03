@@ -8,6 +8,8 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Signup from "./pages/Signup";
 import SigninPass from "./pages/SigninPass";
+import Onboarding from "./pages/Onboarding";
+import { Home } from "@mui/icons-material";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/onboarding",
+    element: <Onboarding />,
+  },
+  {
+    path: "/home",
+    element: <Home />,
   },
 ]);
 

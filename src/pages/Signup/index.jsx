@@ -131,7 +131,7 @@ function Signup() {
                       setTimeout(() => {
                         setVisible(false);
                         setTimeout(() => {
-                          navigate("/");
+                          navigate("/onboarding");
                         }, 400);
                       }, 1500);
                     } else {
