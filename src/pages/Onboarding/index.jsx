@@ -1,16 +1,20 @@
 import {
   Autocomplete,
+  Avatar,
   Box,
+  Button,
   FormControl,
   InputAdornment,
   OutlinedInput,
   TextField,
   Typography,
+  styled,
 } from "@mui/material";
 import React, { useState } from "react";
 import logo from "../../assets/images/semply-logo.png";
 import { animated, useTransition } from "@react-spring/web";
 import { AccountCircle } from "@mui/icons-material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 function Onboarding() {
   const [visible, setVisible] = useState(true);
@@ -1229,6 +1233,18 @@ function Onboarding() {
     "Lucidchart (for flowcharts and diagrams)",
   ];
 
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+  });
+
   return (
     <div style={{ height: "1100px" }}>
       <Box sx={{ mt: 3, ml: 3 }}>
@@ -1238,7 +1254,7 @@ function Onboarding() {
         item ? (
           <animated.div
             style={{
-              width: "1000px",
+              width: "900px",
               height: "1000px",
               boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
               position: "absolute",
@@ -1250,28 +1266,59 @@ function Onboarding() {
               marginBottom: "auto",
               marginLeft: "auto",
               marginRight: "auto",
-              alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "space-between",
               borderRadius: "10px",
               border: "1px solid #ded7d9",
+              display: "flex",
+              padding: "40px 40px 0 40px",
               ...style,
             }}
           >
-            <Box component="form" sx={{ width: "500px", mx: "auto" }}>
+            <Box sx={{ width: "30%", mt: 5 }}>
+              <Avatar
+                sx={{
+                  height: "150px",
+                  width: "150px",
+                  fontSize: 50,
+                  ml: 3,
+                }}
+                alt="John Walker"
+                src="/static/images/avatar/1.jpg"
+              />
+              <Button
+                size="small"
+                sx={{
+                  mt: -7,
+                  ml: 3,
+                  display: "flex",
+                  flexDirection: "column",
+                  color: "#e2668f",
+                  width: "150px",
+                  ":hover": {
+                    bgcolor: "transparent",
+                  },
+                }}
+                component="label"
+                variant="text"
+              >
+                Upload picture
+                <CloudUploadIcon />
+                <VisuallyHiddenInput type="file" />
+              </Button>
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
                   width: "100%",
                   mx: "auto",
+                  mt: 7,
                 }}
               >
                 <TextField
                   sx={{
                     height: "40px",
-                    width: "230px",
+                    width: "47%",
                     fontSize: 12,
-                    mt: 3,
                   }}
                   id="fName"
                   label="First Name"
@@ -1284,9 +1331,8 @@ function Onboarding() {
                 <TextField
                   sx={{
                     height: "40px",
-                    width: "230px",
+                    width: "47%",
                     fontSize: 12,
-                    mt: 3,
                   }}
                   id="lName"
                   label="First Name"
@@ -1302,7 +1348,7 @@ function Onboarding() {
                   onChange={(event) => setEmail(event.target.value)}
                   sx={{
                     height: "40px",
-                    width: "500px",
+                    width: "100%",
                     borderRadius: "10px",
                     fontSize: 12,
                     marginX: "auto",
@@ -1321,10 +1367,13 @@ function Onboarding() {
                   }}
                 />
               </Box>
+            </Box>
+            <Box component="form" sx={{ width: "65%", mt: 10 }}>
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
+                  mt: 5,
                 }}
               >
                 <TextField
@@ -1332,11 +1381,39 @@ function Onboarding() {
                     height: "40px",
                     width: "230px",
                     fontSize: 12,
-                    mt: 3,
                   }}
                   id="username"
                   label="Username"
                   variant="standard"
+                />
+                <Autocomplete
+                  sx={{
+                    height: "40px",
+                    width: "18%",
+                    fontSize: 8,
+                  }}
+                  id="Experience"
+                  options={[
+                    "1 yr",
+                    "2 yrs",
+                    "3 yrs",
+                    "4 yrs",
+                    "5 yrs",
+                    "6 yrs",
+                    "7 yrs",
+                    "8 yrs",
+                    "9 yrs",
+                    "10 yrs",
+                    "10+ yrs",
+                  ]}
+                  getOptionLabel={(option) => option}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Experience"
+                      variant="standard"
+                    />
+                  )}
                 />
                 <Box
                   sx={{
@@ -1350,7 +1427,7 @@ function Onboarding() {
                       opacity: 0.7,
                       fontSize: 12,
                       position: "absolute",
-                      mt: 1,
+                      mt: -3,
                       ml: -0.3,
                     }}
                   >
@@ -1361,7 +1438,6 @@ function Onboarding() {
                       height: "40px",
                       width: "55px",
                       fontSize: 8,
-                      mt: 3,
                     }}
                     id="date"
                     options={date}
@@ -1375,7 +1451,6 @@ function Onboarding() {
                       height: "40px",
                       width: "55px",
                       fontSize: 8,
-                      mt: 3,
                     }}
                     id="Month"
                     options={month}
@@ -1389,7 +1464,6 @@ function Onboarding() {
                       height: "40px",
                       width: "100px",
                       fontSize: 8,
-                      mt: 3,
                     }}
                     id="Year"
                     options={year}
@@ -1400,13 +1474,14 @@ function Onboarding() {
                   />
                 </Box>
               </Box>
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Box
+                sx={{ display: "flex", justifyContent: "space-between", mt: 7 }}
+              >
                 <Autocomplete
                   sx={{
                     height: "40px",
                     width: "30%",
                     fontSize: 8,
-                    mt: 3,
                   }}
                   id="Gender"
                   options={["Male", "Female"]}
@@ -1420,7 +1495,6 @@ function Onboarding() {
                     height: "40px",
                     width: "30%",
                     fontSize: 8,
-                    mt: 3,
                   }}
                   id="Developer"
                   options={[
@@ -1456,7 +1530,6 @@ function Onboarding() {
                     height: "40px",
                     width: "30%",
                     fontSize: 8,
-                    mt: 3,
                   }}
                   id="Country"
                   options={countries}
@@ -1471,7 +1544,7 @@ function Onboarding() {
                   height: "40px",
                   width: "100%",
                   fontSize: 8,
-                  mt: 3,
+                  mt: 7,
                 }}
                 multiple
                 id="Stack"
@@ -1485,36 +1558,12 @@ function Onboarding() {
                   />
                 )}
               />
-              <Autocomplete
-                sx={{
-                  height: "40px",
-                  width: "100px",
-                  fontSize: 8,
-                  mt: 3,
-                }}
-                id="Experience"
-                options={[
-                  "1 yr",
-                  "2 yrs",
-                  "3 yrs",
-                  "4 yrs",
-                  "5 yrs",
-                  "6 yrs",
-                  "7 yrs",
-                  "8 yrs",
-                  "9 yrs",
-                  "10 yrs",
-                  "10+ yrs",
-                ]}
-                getOptionLabel={(option) => option}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Experience"
-                    variant="standard"
-                  />
-                )}
-              />
+              <Typography sx={{ mt: 5, fontSize: 22, opacity: 0.8 }}>
+                Education
+              </Typography>
+              <Typography sx={{ mt: 5, fontSize: 22, opacity: 0.8 }}>
+                Work History
+              </Typography>
             </Box>
           </animated.div>
         ) : (
