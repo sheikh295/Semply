@@ -4,8 +4,10 @@ import {
   Box,
   Button,
   FormControl,
+  IconButton,
   InputAdornment,
   OutlinedInput,
+  Stack,
   TextField,
   Typography,
   styled,
@@ -13,11 +15,19 @@ import {
 import React, { useState } from "react";
 import logo from "../../assets/images/semply-logo.png";
 import { animated, useTransition } from "@react-spring/web";
-import { AccountCircle } from "@mui/icons-material";
+import { AccountCircle, Add } from "@mui/icons-material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import EditIcon from "@mui/icons-material/Edit";
+import InputCard from "./components/EducationCard";
+import Education from "./components/Education";
+import WorkHistory from "./components/WorkHistory";
+import EducationCard from "./components/EducationCard";
+import WorkCard from "./components/WorkCard";
 
 function Onboarding() {
   const [visible, setVisible] = useState(true);
+  const [EducationOpen, setEducationOpen] = useState(false);
+  const [WorkOpen, setWorkOpen] = useState(false);
 
   const transition = useTransition(visible, {
     from: { x: 300, opacity: 0 },
@@ -1558,12 +1568,59 @@ function Onboarding() {
                   />
                 )}
               />
-              <Typography sx={{ mt: 5, fontSize: 22, opacity: 0.8 }}>
-                Education
-              </Typography>
-              <Typography sx={{ mt: 5, fontSize: 22, opacity: 0.8 }}>
-                Work History
-              </Typography>
+              <Stack>
+                <Box
+                  sx={{
+                    mt: 5,
+                    opacity: 0.8,
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Typography sx={{ fontSize: 22 }}>Education</Typography>
+                  <IconButton aria-label="add" sx={{ opacity: 0.8 }}>
+                    <Add />
+                  </IconButton>
+                </Box>
+                <Education
+                  open={EducationOpen}
+                  setEducationClose={() => {
+                    setEducationOpen(false);
+                  }}
+                />
+                <EducationCard
+                  setEducationOpen={() => {
+                    setEducationOpen(true);
+                  }}
+                />
+              </Stack>
+              <Stack>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    mt: 5,
+                    opacity: 0.8,
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography sx={{ fontSize: 22 }}>Work History</Typography>
+                  <IconButton aria-label="add">
+                    <Add />
+                  </IconButton>
+                </Box>
+                <WorkHistory
+                  open={WorkOpen}
+                  setWorkClose={() => {
+                    setWorkOpen(false);
+                  }}
+                />
+                <WorkCard
+                  setWorkOpen={() => {
+                    setWorkOpen(true);
+                  }}
+                />
+              </Stack>
             </Box>
           </animated.div>
         ) : (

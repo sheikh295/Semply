@@ -26,17 +26,13 @@ import GoogleIcon from "@mui/icons-material/Google";
 import logo from "../../assets/images/semply-logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getPass } from "../../store/features/dbData/EmailsSlice";
-import {
-  getId,
-  getData,
-  setDisclaimerfalse,
-} from "../../store/features/dbData/dbSlice";
+import { getId, getData } from "../../store/features/dbData/dbSlice";
 import { useNavigate } from "react-router-dom";
 import LoadingButton from "@mui/lab/LoadingButton";
 import CloseIcon from "@mui/icons-material/Close";
 import styled from "@emotion/styled";
 import { useTransition, animated } from "@react-spring/web";
-
+import { setDisclaimerfalse } from "../../store/features/misc/miscSlice";
 function Signin() {
   const dbData = useSelector((state) => state.dbData.value);
   const emails = useSelector((state) => state.emails.value);
@@ -45,7 +41,7 @@ function Signin() {
   const [Email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const disclaimer = useSelector((state) => state.dbData.disclaimer);
+  const disclaimer = useSelector((state) => state.misc.disclaimer);
   const [visible, setVisible] = useState(true);
 
   const BootstrapDialog = styled(Dialog)(() => ({

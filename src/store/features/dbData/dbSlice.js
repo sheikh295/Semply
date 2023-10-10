@@ -18,7 +18,6 @@ const querySnapshot = await getDocs(collection(FBDataBase, "users"));
 
 const initialState = {
   value: null,
-  disclaimer: true,
 };
 
 export const dbSlice = createSlice({
@@ -52,13 +51,9 @@ export const dbSlice = createSlice({
         password: action.payload[3],
       });
     },
-    setDisclaimerfalse: (state) => {
-      state.disclaimer = false;
-    },
   },
 });
 
-export const { getData, getId, createUser, setDisclaimerfalse } =
-  dbSlice.actions;
+export const { getData, getId, createUser } = dbSlice.actions;
 
 export default dbSlice.reducer;
