@@ -1,8 +1,17 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
+import Education from "./Education";
 
 function EducationCard(props) {
+  const [EducationOpen, setEducationOpen] = useState(false);
+  const [degreeN, setDegreeN] = useState("eg: Software Engineering");
+  const [uniN, setUniN] = useState("eg: COMSATS");
+  const [description, setDescription] = useState(
+    "Description: eg. Skills, achievments, leadership roles etc"
+  );
+  const [from, setFrom] = useState("0000");
+  const [to, setTo] = useState("0000");
   return (
     <div>
       <Box
@@ -18,7 +27,7 @@ function EducationCard(props) {
       >
         <Box sx={{ width: "80%" }}>
           <Typography sx={{ opacity: 0.8, fontStyle: "italic" }}>
-            eg: Bachelors of Computer Science
+            {degreeN}
           </Typography>
           <Typography
             sx={{
@@ -29,7 +38,7 @@ function EducationCard(props) {
               fontSize: 14,
             }}
           >
-            eg: University of Illinois, Chicago, United States
+            {uniN}
           </Typography>
           <Typography
             sx={{
@@ -40,8 +49,7 @@ function EducationCard(props) {
               fontSize: 14,
             }}
           >
-            Decription: eg. If any, achievemrnts, skills learnt, leadership
-            roles etc
+            {description}
           </Typography>
         </Box>
         <Box
@@ -59,17 +67,31 @@ function EducationCard(props) {
               fontSize: 14,
             }}
           >
-            yyyy - yyyy
+            {from} - {to}
           </Typography>
           <IconButton
             aria-label="edit"
             sx={{ opacity: 0.8 }}
-            onClick={props.setEducationOpen}
+            onClick={() => {
+              setEducationOpen(true);
+            }}
           >
             <EditIcon />
           </IconButton>
         </Box>
       </Box>
+      <Education
+        open={EducationOpen}
+        setEducationClose={() => {
+          setEducationOpen(false);
+        }}
+        setDegreeN={setDegreeN}
+        setUniN={setUniN}
+        setDescription={setDescription}
+        setFrom={setFrom}
+        setTo={setTo}
+        setEducationSave={props.setEducationSave}
+      />
     </div>
   );
 }

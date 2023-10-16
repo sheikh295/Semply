@@ -12,7 +12,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/images/semply-logo.png";
 import { animated, useTransition } from "@react-spring/web";
 import { AccountCircle, Add } from "@mui/icons-material";
@@ -23,17 +23,12 @@ import Education from "./components/Education";
 import WorkHistory from "./components/WorkHistory";
 import EducationCard from "./components/EducationCard";
 import WorkCard from "./components/WorkCard";
+import { useSelector } from "react-redux";
+import EducationList from "./components/EducationList";
+import WorkList from "./components/WorkList";
 
-function Onboarding() {
+function Onboarding(props) {
   const [visible, setVisible] = useState(true);
-  const [EducationOpen, setEducationOpen] = useState(false);
-  const [WorkOpen, setWorkOpen] = useState(false);
-
-  const transition = useTransition(visible, {
-    from: { x: 300, opacity: 0 },
-    enter: { x: 0, opacity: 1 },
-    leave: { x: -300, opacity: 0 },
-  });
 
   const date = [
     { label: "1" },
@@ -1255,6 +1250,22 @@ function Onboarding() {
     width: 1,
   });
 
+  const transition = useTransition(visible, {
+    from: { x: 300, opacity: 0 },
+    enter: { x: 0, opacity: 1 },
+    leave: { x: -300, opacity: 0 },
+  });
+
+  const [education2, setEducation2] = useState(false);
+  const [education3, setEducation3] = useState(false);
+
+  const [educationSave, setEducationSave] = useState(false);
+
+  const [work2, setWork2] = useState(false);
+  const [work3, setWork3] = useState(false);
+
+  const [workSave, setWorkSave] = useState(false);
+
   return (
     <div style={{ height: "1100px" }}>
       <Box sx={{ mt: 3, ml: 3 }}>
@@ -1265,7 +1276,7 @@ function Onboarding() {
           <animated.div
             style={{
               width: "900px",
-              height: "1000px",
+              height: "1100px",
               boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
               position: "absolute",
               top: 0,
@@ -1568,59 +1579,83 @@ function Onboarding() {
                   />
                 )}
               />
-              <Stack>
-                <Box
-                  sx={{
-                    mt: 5,
-                    opacity: 0.8,
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Typography sx={{ fontSize: 22 }}>Education</Typography>
-                  <IconButton aria-label="add" sx={{ opacity: 0.8 }}>
-                    <Add />
-                  </IconButton>
-                </Box>
-                <Education
-                  open={EducationOpen}
-                  setEducationClose={() => {
-                    setEducationOpen(false);
-                  }}
-                />
-                <EducationCard
-                  setEducationOpen={() => {
-                    setEducationOpen(true);
-                  }}
-                />
-              </Stack>
-              <Stack>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    mt: 5,
-                    opacity: 0.8,
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography sx={{ fontSize: 22 }}>Work History</Typography>
-                  <IconButton aria-label="add">
-                    <Add />
-                  </IconButton>
-                </Box>
-                <WorkHistory
-                  open={WorkOpen}
-                  setWorkClose={() => {
-                    setWorkOpen(false);
-                  }}
-                />
-                <WorkCard
-                  setWorkOpen={() => {
-                    setWorkOpen(true);
-                  }}
-                />
-              </Stack>
+              <Box
+                sx={{
+                  mt: 2,
+                  display: "flex",
+                  width: "92%",
+                  justifyContent: "space-between",
+                  position: "absolute",
+                  ml: -40,
+                }}
+              >
+                <Stack sx={{ width: "45%" }}>
+                  <Box
+                    sx={{
+                      mt: 5,
+                      opacity: 0.8,
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Typography sx={{ fontSize: 22 }}>Education</Typography>
+                    <IconButton
+                      aria-label="add"
+                      sx={{ opacity: 0.8 }}
+                      onClick={() => {
+                        if (education2 == false) {
+                          setEducation2(true);
+                        }
+                        if (education2 == true) {
+                          setEducation3(true);
+                        }
+                      }}
+                    >
+                      <Add />
+                    </IconButton>
+                  </Box>
+                  <EducationList
+                    education2={education2}
+                    education3={education3}
+                    setEducation2={setEducation2}
+                    setEducation3={setEducation3}
+                    setEducationSave={setEducationSave}
+                  />
+                </Stack>
+                <Stack sx={{ width: "45%" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      mt: 5,
+                      opacity: 0.8,
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography sx={{ fontSize: 22 }}>Work History</Typography>
+                    <IconButton
+                      aria-label="add"
+                      onClick={() => {
+                        if (work2 == false) {
+                          setWork2(true);
+                        }
+                        if (work2 == true) {
+                          setWork3(true);
+                        }
+                      }}
+                    >
+                      <Add />
+                    </IconButton>
+                  </Box>
+                  <WorkList
+                    work2={work2}
+                    work3={work3}
+                    setWork2={setWork2}
+                    setWork3={setWork3}
+                    setWorkSave={setWorkSave}
+                  />
+                </Stack>
+              </Box>
             </Box>
           </animated.div>
         ) : (

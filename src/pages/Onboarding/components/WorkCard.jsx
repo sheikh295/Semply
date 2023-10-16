@@ -1,8 +1,17 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
+import WorkHistory from "./WorkHistory";
 
 function WorkCard(props) {
+  const [workOpen, setWorkOpen] = useState(false);
+  const [Job, setJob] = useState("eg: Software Engineer");
+  const [companyName, setCompanyName] = useState("eg: NASA");
+  const [description, setDescription] = useState(
+    "Description: eg. Skills, achievments, leadership roles etc"
+  );
+  const [from, setFrom] = useState("0000");
+  const [to, setTo] = useState("0000");
   return (
     <div>
       <Box
@@ -18,7 +27,7 @@ function WorkCard(props) {
       >
         <Box sx={{ width: "80%" }}>
           <Typography sx={{ opacity: 0.8, fontStyle: "italic" }}>
-            eg: Software Engineer
+            {Job}
           </Typography>
           <Typography
             sx={{
@@ -29,7 +38,7 @@ function WorkCard(props) {
               fontSize: 14,
             }}
           >
-            eg: NASA
+            {companyName}
           </Typography>
           <Typography
             sx={{
@@ -40,8 +49,7 @@ function WorkCard(props) {
               fontSize: 14,
             }}
           >
-            Decription: eg. If any, achievemrnts, skills learnt, leadership
-            roles etc
+            {description}
           </Typography>
         </Box>
         <Box
@@ -59,17 +67,31 @@ function WorkCard(props) {
               fontSize: 14,
             }}
           >
-            yyyy - yyyy
+            {from} - {to}
           </Typography>
           <IconButton
             aria-label="edit"
             sx={{ opacity: 0.8 }}
-            onClick={props.setWorkOpen}
+            onClick={() => {
+              setWorkOpen(true);
+            }}
           >
             <EditIcon />
           </IconButton>
         </Box>
       </Box>
+      <WorkHistory
+        open={workOpen}
+        setWorkClose={() => {
+          setWorkOpen(false);
+        }}
+        setJob={setJob}
+        setCompanyName={setCompanyName}
+        setDescription={setDescription}
+        setFrom={setFrom}
+        setTo={setTo}
+        setWorkSave={props.setWorkSave}
+      />
     </div>
   );
 }
