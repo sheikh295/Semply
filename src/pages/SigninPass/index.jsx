@@ -21,10 +21,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../store/features/dbData/dbSlice";
 import { LoadingButton } from "@mui/lab";
 import { animated, useTransition } from "@react-spring/web";
+import { useNavigate } from "react-router-dom";
 
 function SigninPass() {
-  const emails = useSelector((state) => state.emails.value);
-  const dbData = useSelector((state) => state.dbData.value);
+  const passes = useSelector((state) => state.dbData.emails);
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const [Pass, setPass] = useState("");
@@ -32,6 +32,7 @@ function SigninPass() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [visible, setVisible] = useState(true);
+  const navigate = useNavigate();
 
   const transition = useTransition(visible, {
     from: { x: 300, opacity: 0 },
@@ -41,7 +42,7 @@ function SigninPass() {
 
   const loginSubmitHandler = (event) => {
     event.preventDefault();
-    const pass = atob(emails);
+    const pass = atob(passes);
     if (pass == Pass) {
       dispatch(getData());
       setLoading(true);
@@ -50,7 +51,7 @@ function SigninPass() {
         setLoading(false);
         setVisible(false);
         setTimeout(() => {
-          navigate("/signup");
+          // navigate("/onboarding");
         }, 400);
       }, 2000);
     } else {

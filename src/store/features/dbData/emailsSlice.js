@@ -36,6 +36,6 @@ export const emailsSlice = createSlice({
   },
 });
 
-export const { getPass } = emailsSlice.actions;
+// export const { getPass } = emailsSlice.actions;
 
 export default emailsSlice.reducer;
