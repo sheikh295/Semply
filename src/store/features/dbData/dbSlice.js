@@ -12,9 +12,6 @@ import {
 } from "firebase/firestore";
 import { FBDataBase } from "../../../shared/Firebase";
 
-let id = "";
-let user = null;
-
 const querySnapshot = await getDocs(collection(FBDataBase, "users"));
 
 let emails = [];
@@ -26,26 +23,21 @@ const initialState = {
   value: null,
   emails: emails,
   userData: null,
+  isOnboarded: null,
+  id: "",
 };
 
 export const dbSlice = createSlice({
   name: "dbData",
   initialState,
   reducers: {
-    getPass: (state, action) => {
+    getData: (state, action) => {
       querySnapshot.forEach((doc) => {
         if (doc.data().email == action.payload) {
           state.emails = doc.data().password;
-        } else {
-          return "";
-        }
-      });
-    },
-    getId: (state, action) => {
-      querySnapshot.forEach((doc) => {
-        if (doc.data().email == action.payload) {
-          id = doc.id;
-          state.value = doc.id;
+          state.id = doc.id;
+          state.userData = doc.data();
+          state.isOnboarded = doc.data().isOnboarded;
         } else {
           return "";
         }
@@ -57,24 +49,12 @@ export const dbSlice = createSlice({
         lName: action.payload[1],
         email: action.payload[2],
         password: action.payload[3],
+        isOnboarded: false,
       });
-    },
-    getData: (state, action) => {
-      const docRef = doc(FBDataBase, "users", `${id}`);
-      const docSnap = getDoc(docRef);
-      if (docSnap != null / undefined) {
-        docSnap
-          .then((response) => {
-            state.userData = response.data();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
     },
   },
 });
 
-export const { getData, getId, createUser, getPass } = dbSlice.actions;
+export const { getData, createUser } = dbSlice.actions;
 
 export default dbSlice.reducer;

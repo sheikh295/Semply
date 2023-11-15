@@ -131,13 +131,11 @@ function Signup() {
                     if (alreadyRegistered == undefined) {
                       const encodedPass = btoa(Pass);
                       dispatch(createUser([fName, lName, Email, encodedPass]));
-                      dispatch(getId(Email));
                       setError(false);
                       setTimeout(() => {
                         setVisible(false);
-                        dispatch(getData());
                         setTimeout(() => {
-                          navigate("/onboarding");
+                          window.location.href = "http://localhost:5173";
                         }, 400);
                       }, 1500);
                     } else {

@@ -59,8 +59,7 @@ function Signin() {
     event.preventDefault();
     const eml = emails.find(matchEmail);
     if (eml == Email) {
-      dispatch(getPass(eml));
-      dispatch(getId(eml));
+      dispatch(getData(eml));
       setLoading(true);
       setError(false);
       setTimeout(() => {

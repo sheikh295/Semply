@@ -44,7 +44,6 @@ function SigninPass() {
     event.preventDefault();
     const pass = atob(passes);
     if (pass == Pass) {
-      dispatch(getData());
       setLoading(true);
       setError(false);
       setTimeout(() => {
