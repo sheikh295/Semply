@@ -25,6 +25,7 @@ import { useNavigate } from "react-router-dom";
 
 function SigninPass() {
   const passes = useSelector((state) => state.dbData.emails);
+  const isOnboarded = useSelector((state) => state.dbData.userData.isOnboarded);
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const [Pass, setPass] = useState("");
@@ -50,7 +51,11 @@ function SigninPass() {
         setLoading(false);
         setVisible(false);
         setTimeout(() => {
-          // navigate("/onboarding");
+          if (isOnboarded == false) {
+            navigate("/onboarding");
+          } else {
+            navigate("/dashboard");
+          }
         }, 400);
       }, 2000);
     } else {

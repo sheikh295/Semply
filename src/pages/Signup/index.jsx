@@ -19,11 +19,7 @@ import React, { useEffect, useState } from "react";
 import GoogleIcon from "@mui/icons-material/Google";
 import logo from "../../assets/images/semply-logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getData,
-  createUser,
-  getId,
-} from "../../store/features/dbData/dbSlice";
+import { getData, createUser } from "../../store/features/dbData/dbSlice";
 import { useNavigate } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
 import { animated, useTransition } from "@react-spring/web";

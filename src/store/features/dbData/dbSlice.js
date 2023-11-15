@@ -23,7 +23,6 @@ const initialState = {
   value: null,
   emails: emails,
   userData: null,
-  isOnboarded: null,
   id: "",
 };
 
@@ -37,7 +36,6 @@ export const dbSlice = createSlice({
           state.emails = doc.data().password;
           state.id = doc.id;
           state.userData = doc.data();
-          state.isOnboarded = doc.data().isOnboarded;
         } else {
           return "";
         }

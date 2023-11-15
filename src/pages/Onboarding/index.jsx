@@ -1267,7 +1267,6 @@ function Onboarding(props) {
   const [workSave, setWorkSave] = useState(false);
 
   const userData = useSelector((state) => state.dbData.userData);
-  console.log(userData);
 
   return (
     <div style={{ height: "1100px" }}>

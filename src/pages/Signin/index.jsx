@@ -25,7 +25,7 @@ import React, { useState } from "react";
 import GoogleIcon from "@mui/icons-material/Google";
 import logo from "../../assets/images/semply-logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getId, getPass } from "../../store/features/dbData/dbSlice";
+import { getData } from "../../store/features/dbData/dbSlice";
 import { useNavigate } from "react-router-dom";
 import LoadingButton from "@mui/lab/LoadingButton";
 import CloseIcon from "@mui/icons-material/Close";
