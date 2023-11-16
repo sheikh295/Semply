@@ -26,6 +26,7 @@ import WorkCard from "./components/WorkCard";
 import { useSelector } from "react-redux";
 import EducationList from "./components/EducationList";
 import WorkList from "./components/WorkList";
+import { LoadingButton } from "@mui/lab";
 
 function Onboarding(props) {
   const [visible, setVisible] = useState(true);
@@ -1267,6 +1268,11 @@ function Onboarding(props) {
   const [workSave, setWorkSave] = useState(false);
 
   const userData = useSelector((state) => state.dbData.userData);
+  const [loading, setLoading] = useState(false);
+
+  const onboardingSubmitHandler = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <div style={{ height: "1100px" }}>
@@ -1278,11 +1284,14 @@ function Onboarding(props) {
           <animated.div
             style={{
               width: "900px",
-              height: "900px",
+              height: "750px",
               ...(education2 == true || work2 == true
-                ? { height: "1000px" }
+                ? { height: "920px" }
                 : ""),
               ...(education3 == true || work3 == true
+                ? { height: "920px" }
+                : ""),
+              ...((education2 && education3) || (work2 && work3)
                 ? { height: "1100px" }
                 : ""),
               boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
@@ -1397,7 +1406,11 @@ function Onboarding(props) {
                 />
               </Box>
             </Box>
-            <Box component="form" sx={{ width: "65%", mt: 10 }}>
+            <Box
+              component="form"
+              sx={{ width: "65%", mt: 10 }}
+              onSubmit={onboardingSubmitHandler(event)}
+            >
               <Box
                 sx={{
                   display: "flex",
@@ -1664,6 +1677,38 @@ function Onboarding(props) {
                   />
                 </Stack>
               </Box>
+              <LoadingButton
+                loading={loading ? true : false}
+                sx={[
+                  {
+                    color: "#E7457A",
+                    borderRadius: 10,
+                    position: "absolute",
+                    bottom: 40,
+                    right: 200,
+                  },
+                  { ":hover": { color: "#06005C" } },
+                ]}
+              >
+                Skip for later
+              </LoadingButton>
+              <LoadingButton
+                loading={loading ? true : false}
+                type="submit"
+                variant="contained"
+                sx={[
+                  {
+                    position: "absolute",
+                    borderRadius: 10,
+                    bottom: 40,
+                    bgcolor: "#E7457A",
+                    right: 40,
+                  },
+                  { ":hover": { bgcolor: "#06005C" } },
+                ]}
+              >
+                Save & Proceed
+              </LoadingButton>
             </Box>
           </animated.div>
         ) : (
