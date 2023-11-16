@@ -17,7 +17,7 @@ function WorkHistory(props) {
         component="form"
         onSubmit={(event) => {
           event.preventDefault();
-          props.setWorkClose;
+          props.setWorkOpen(false);
           props.setWorkSave(true);
         }}
       >

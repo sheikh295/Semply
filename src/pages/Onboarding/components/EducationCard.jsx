@@ -16,7 +16,8 @@ function EducationCard(props) {
     <div>
       <Box
         sx={{
-          width: "93%",
+          width: "380px",
+          minHeight: "110px",
           p: 3,
           borderRadius: "10px",
           mt: 2,
@@ -84,13 +85,23 @@ function EducationCard(props) {
         open={EducationOpen}
         setEducationClose={() => {
           setEducationOpen(false);
+          setDegreeN("eg: Software Engineering");
+          setUniN("eg: COMSATS");
+          setDescription(
+            "Description: eg. Skills, achievments, leadership roles etc"
+          );
+          setFrom("0000");
+          setTo("0000");
         }}
         setDegreeN={setDegreeN}
         setUniN={setUniN}
         setDescription={setDescription}
         setFrom={setFrom}
         setTo={setTo}
-        setEducationSave={props.setEducationSave}
+        setEducationSave={() => {
+          props.setEducationSave;
+          setEducationOpen(false);
+        }}
       />
     </div>
   );

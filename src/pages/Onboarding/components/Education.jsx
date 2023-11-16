@@ -20,7 +20,6 @@ function Education(props) {
         component="form"
         onSubmit={(event) => {
           event.preventDefault();
-          props.setEducationClose;
           props.setEducationSave(true);
         }}
       >

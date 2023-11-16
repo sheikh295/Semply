@@ -16,7 +16,8 @@ function WorkCard(props) {
     <div>
       <Box
         sx={{
-          width: "93%",
+          width: "380px",
+          minHeight: "110px",
           p: 3,
           borderRadius: "10px",
           mt: 2,
@@ -84,6 +85,13 @@ function WorkCard(props) {
         open={workOpen}
         setWorkClose={() => {
           setWorkOpen(false);
+          setJob("eg: Software Engineer");
+          setCompanyName("eg: NASA");
+          setDescription(
+            "Description: eg. Skills, achievments, leadership roles etc"
+          );
+          setFrom("0000");
+          setTo("0000");
         }}
         setJob={setJob}
         setCompanyName={setCompanyName}
@@ -91,6 +99,7 @@ function WorkCard(props) {
         setFrom={setFrom}
         setTo={setTo}
         setWorkSave={props.setWorkSave}
+        setWorkOpen={setWorkOpen}
       />
     </div>
   );

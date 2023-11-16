@@ -1278,7 +1278,13 @@ function Onboarding(props) {
           <animated.div
             style={{
               width: "900px",
-              height: "1100px",
+              height: "900px",
+              ...(education2 == true || work2 == true
+                ? { height: "1000px" }
+                : ""),
+              ...(education3 == true || work3 == true
+                ? { height: "1100px" }
+                : ""),
               boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
               position: "absolute",
               top: 0,
@@ -1402,7 +1408,7 @@ function Onboarding(props) {
                 <TextField
                   sx={{
                     height: "40px",
-                    width: "230px",
+                    width: "30%",
                     fontSize: 12,
                   }}
                   id="username"
@@ -1440,7 +1446,7 @@ function Onboarding(props) {
                 />
                 <Box
                   sx={{
-                    width: "230px",
+                    width: "35%",
                     display: "flex",
                     justifyContent: "space-between",
                   }}
@@ -1459,7 +1465,7 @@ function Onboarding(props) {
                   <Autocomplete
                     sx={{
                       height: "40px",
-                      width: "55px",
+                      width: "25%",
                       fontSize: 8,
                     }}
                     id="date"
@@ -1472,7 +1478,7 @@ function Onboarding(props) {
                   <Autocomplete
                     sx={{
                       height: "40px",
-                      width: "55px",
+                      width: "25%",
                       fontSize: 8,
                     }}
                     id="Month"
@@ -1485,7 +1491,7 @@ function Onboarding(props) {
                   <Autocomplete
                     sx={{
                       height: "40px",
-                      width: "100px",
+                      width: "45%",
                       fontSize: 8,
                     }}
                     id="Year"
